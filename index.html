@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Untuk Livia Octavia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400;1,6..96,500&family=Dancing+Script:wght@600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+/* Layout: rose-lit night. Asymmetric hero with a huge italic name and soft glows, petals falling behind,
+   then a counter, a letter on paper, touchable reasons, love coupons, a love meter and one final question. */
+:root {
+  --bg: #fff1f4;
+  --surface: #ffffff;
+  --fg: #3a1626;
+  --muted: #86566a;
+  --rose: #d6336c;
+  --petal: #f7a8c2;
+  --gold: #b9822f;
+  --line: #f1cdd9;
+  --glow1: rgba(247, 168, 194, .55);
+  --glow2: rgba(233, 184, 114, .35);
+  --font-display: "Bodoni Moda", "Didot", "Times New Roman", serif;
+  --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-hand: "Dancing Script", "Brush Script MT", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d0e1e; --surface: #2a1428; --fg: #fde8ef; --muted: #c9a0b3;
+    --rose: #ff6b9d; --petal: #ff9fc0; --gold: #e9b872; --line: #4a2745;
+    --glow1: rgba(255, 107, 157, .28); --glow2: rgba(233, 184, 114, .16);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d0e1e; --surface: #2a1428; --fg: #fde8ef; --muted: #c9a0b3;
+  --rose: #ff6b9d; --petal: #ff9fc0; --gold: #e9b872; --line: #4a2745;
+  --glow1: rgba(255, 107, 157, .28); --glow2: rgba(233, 184, 114, .16);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  padding-inline: 20px;
+  padding-block: 0 96px;
+  position: relative;
+  overflow-x: hidden;
+}
+#petals { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; max-width: 960px; margin-inline: auto; }
+h1, h2 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; margin: 0; line-height: 1.05; }
+p { margin: 0; }
+.eyebrow { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+section { padding-block: 44px; border-top: 1px solid var(--line); }
+.sec-title { font-size: clamp(2rem, 6vw, 3rem); font-style: italic; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+@media (min-width: 760px) { .split { grid-template-columns: 220px minmax(0, 1fr); gap: 56px; } }
+.stack { display: grid; gap: 12px; align-content: start; }
+
+/* hero */
+.hero { border-top: 0; padding-block: 72px 56px; display: grid; gap: 26px; position: relative; }
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; z-index: -1; }
+.hero::before { width: min(70vw, 460px); aspect-ratio: 1; right: -12%; top: 4%; background: radial-gradient(circle, var(--glow1), transparent 68%); }
+.hero::after { width: min(60vw, 380px); aspect-ratio: 1; left: -14%; bottom: -8%; background: radial-gradient(circle, var(--glow2), transparent 68%); }
+.hero h1 { font-size: clamp(3.4rem, 15vw, 8.5rem); letter-spacing: -.02em; }
+.hero h1 em { display: block; font-style: italic; color: var(--rose); padding-left: .55em; }
+.hero p.lead { max-width: 30em; color: var(--muted); font-size: 1.15rem; }
+.sweet { font-family: var(--font-hand); font-size: clamp(1.5rem, 5vw, 2.1rem); color: var(--rose); min-height: 1.5em; transition: opacity .5s ease; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--rose); color: #fff; border: 0; border-radius: 999px;
+  padding: 13px 24px; font: 700 15px var(--font-body); cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 10px 24px -12px var(--rose);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1.5px solid var(--line); box-shadow: none; }
+.btn svg { width: 18px; height: 18px; fill: currentColor; }
+.btn:focus-visible, .reason:focus-visible, .coupon:focus-visible, input:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.count { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+/* counter */
+.clock { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
+.tick { border: 1px solid var(--line); border-radius: 4px; padding: 16px 14px; background: var(--surface); }
+.tick b { display: block; font-family: var(--font-display); font-size: clamp(2rem, 7vw, 3rem); font-style: italic; color: var(--rose); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tick span { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.datebox { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.datebox input { font: 600 15px var(--font-body); color: var(--fg); background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+.hint { color: var(--muted); font-size: 14px; }
+.mile { list-style: none; margin: 0; padding: 0; display: grid; }
+.mile li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.mile b { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.2; }
+.mile small { grid-column: 1; color: var(--muted); font-size: 14px; }
+.mile .st { grid-row: 1 / span 2; grid-column: 2; align-self: center; text-align: right; font-weight: 700; font-size: 13px; color: var(--rose); font-variant-numeric: tabular-nums; }
+.mile li.done .st { color: var(--gold); }
+
+/* letter */
+.paper {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+  padding: clamp(24px, 5vw, 48px); display: grid; gap: 18px;
+  box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--rose) 55%, transparent);
+}
+.paper .greet { font-family: var(--font-hand); font-size: 2rem; color: var(--rose); line-height: 1.2; }
+.paper .sign { font-family: var(--font-hand); font-size: 1.9rem; margin-top: 6px; color: var(--rose); }
+.paper .ps { color: var(--muted); font-size: 15px; border-top: 1px dashed var(--line); padding-top: 14px; }
+
+/* reasons */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.reason {
+  text-align: left; background: transparent; color: var(--fg); font: inherit; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 4px; padding: 20px 20px 22px;
+  display: grid; gap: 10px; align-content: start; min-width: 0;
+  transition: background .25s ease, border-color .25s ease;
+}
+.reason svg { width: 18px; height: 18px; fill: var(--petal); transition: fill .25s ease, transform .25s ease; }
+.reason b { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 1.35rem; line-height: 1.2; }
+.reason span { color: var(--muted); font-size: 15px; line-height: 1.6; }
+.reason:hover, .reason.on { background: var(--surface); border-color: var(--rose); }
+.reason.on svg { fill: var(--rose); transform: scale(1.25); }
+
+/* coupons */
+.coupon {
+  position: relative; text-align: left; font: inherit; color: var(--fg); cursor: pointer; min-width: 0;
+  background: var(--surface); border: 1.5px dashed var(--rose); border-radius: 10px; padding: 18px 18px 20px;
+  display: grid; gap: 6px; align-content: start; transition: transform .2s ease, opacity .3s ease;
+}
+.coupon:hover { transform: rotate(-.8deg) translateY(-2px); }
+.coupon small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.coupon b { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 1.4rem; line-height: 1.2; }
+.coupon span { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+.coupon .state { margin-top: 6px; color: var(--rose); font-weight: 700; font-size: 13px; }
+.coupon.used { opacity: .6; border-style: solid; border-color: var(--line); }
+.coupon.used b { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+/* meter */
+.meter-wrap { display: grid; gap: 16px; }
+.meter-val { font-family: var(--font-display); font-style: italic; font-size: clamp(3rem, 12vw, 6rem); color: var(--rose); line-height: 1; font-variant-numeric: tabular-nums; }
+.meter-msg { color: var(--muted); min-height: 3.4em; max-width: 30em; }
+input[type=range] { width: 100%; accent-color: var(--rose); height: 28px; cursor: pointer; }
+
+/* promises */
+.promises ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.promises li { padding-block: 16px; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: baseline; }
+.promises li::before { content: ""; flex: none; width: 8px; height: 8px; background: var(--rose); border-radius: 50% 50% 0 50%; transform: rotate(45deg) translateY(-2px); }
+
+/* final question */
+.final { padding-block: 64px 24px; display: grid; gap: 24px; justify-items: start; }
+.final h2 { font-size: clamp(2.2rem, 8vw, 4.6rem); max-width: 12em; }
+.final h2 em { color: var(--rose); }
+.ask { position: relative; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; min-height: 84px; width: 100%; }
+#yes { transition: transform .2s ease; transform-origin: left center; }
+#no { transition: transform .15s ease; }
+#secret { font-family: var(--font-hand); font-size: clamp(1.7rem, 5.4vw, 2.6rem); line-height: 1.3; color: var(--rose); min-height: 4em; max-width: 20em; }
+footer { color: var(--muted); font-size: 13px; padding-top: 16px; }
+
+/* memories: 10 bingkai foto */
+.memories { display: grid; gap: 32px; }
+.frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); grid-auto-flow: dense; gap: 40px 28px; align-items: start; }
+@media (min-width: 760px) { .frames .wide { grid-column: span 2; } }
+.frame { margin: 0; display: grid; gap: 12px; min-width: 0; }
+.photo { position: relative; overflow: hidden; display: grid; place-items: center; background: color-mix(in srgb, var(--petal) 26%, var(--surface)); }
+.photo .ph { display: grid; justify-items: center; gap: 6px; padding: 8px; text-align: center; color: var(--muted); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+.photo .ph svg { width: 28px; height: 28px; fill: var(--petal); }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.frame figcaption { font-family: var(--font-hand); font-size: 1.4rem; line-height: 1.25; color: var(--rose); text-align: center; }
+
+/* 1 polaroid */
+.f-polaroid { background: var(--surface); border: 1px solid var(--line); padding: 14px 14px 18px; box-shadow: 0 16px 30px -18px color-mix(in srgb, var(--rose) 50%, transparent); transform: rotate(-2deg); }
+.f-polaroid .photo { aspect-ratio: 1; }
+/* 2 emas klasik */
+.f-gold { background: var(--surface); border: 6px double var(--gold); padding: 12px 12px 16px; }
+.f-gold .photo { aspect-ratio: 3 / 4; outline: 1px solid var(--gold); outline-offset: 3px; }
+/* 3 hati */
+.f-heart .photo { aspect-ratio: 1; -webkit-mask: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.2l-1.4-1.3C5.4 15.2 2 12.1 2 8.3 2 5.2 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.2 22 8.3c0 3.8-3.4 6.9-8.6 11.6L12 21.2z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.2l-1.4-1.3C5.4 15.2 2 12.1 2 8.3 2 5.2 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.2 22 8.3c0 3.8-3.4 6.9-8.6 11.6L12 21.2z'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* 4 oval vintage */
+.f-oval .photo { aspect-ratio: 3 / 4; border-radius: 50%; margin: 8px; box-shadow: 0 0 0 5px var(--surface), 0 0 0 7px var(--gold); }
+/* 5 rol film */
+.f-film { position: relative; background: var(--fg); padding: 30px 12px 32px; border-radius: 4px; }
+.f-film::before, .f-film::after { content: ""; position: absolute; left: 10px; right: 10px; height: 8px; border-radius: 2px; background: repeating-linear-gradient(90deg, var(--bg) 0 10px, transparent 10px 20px); }
+.f-film::before { top: 11px; }
+.f-film::after { bottom: 11px; }
+.f-film .photo { aspect-ratio: 3 / 2; }
+.f-film figcaption { color: var(--bg); }
+/* 6 jendela lengkung */
+.f-arch .photo { aspect-ratio: 3 / 4; border-radius: 999px 999px 10px 10px; margin: 8px; box-shadow: 0 0 0 5px var(--surface), 0 0 0 7px var(--rose); }
+/* 7 washi tape */
+.f-washi { position: relative; background: var(--surface); border: 1px solid var(--line); padding: 16px 16px 18px; transform: rotate(1.6deg); }
+.f-washi::before, .f-washi::after { content: ""; position: absolute; top: -10px; width: 74px; height: 22px; background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--petal) 75%, transparent) 0 6px, color-mix(in srgb, var(--gold) 35%, transparent) 6px 12px); }
+.f-washi::before { left: -14px; transform: rotate(-32deg); }
+.f-washi::after { right: -14px; transform: rotate(32deg); }
+.f-washi .photo { aspect-ratio: 4 / 5; }
+/* 8 neon mawar */
+.f-neon .photo { aspect-ratio: 1; margin: 6px; border-radius: 14px; border: 2px solid var(--rose); box-shadow: 0 0 0 4px color-mix(in srgb, var(--rose) 18%, transparent), 0 0 26px color-mix(in srgb, var(--rose) 50%, transparent); }
+/* 9 kartu pos */
+.f-post { background: var(--surface); border: 1px solid var(--line); padding: 16px; }
+.f-post::before { content: "Kartu pos \2022 untuk Livia"; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.f-post .photo { aspect-ratio: 3 / 2; border: 2px dashed var(--line); }
+/* 10 kaca lembut */
+.f-glass { padding: 12px 12px 16px; border-radius: 28px; border: 1px solid var(--line); background: linear-gradient(150deg, color-mix(in srgb, var(--petal) 45%, var(--surface)), var(--surface)); box-shadow: 0 18px 36px -22px var(--rose); }
+.f-glass .photo { aspect-ratio: 4 / 5; border-radius: 20px; }
+
+/* music button */
+.music {
+  position: fixed; z-index: 5; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 11px 18px;
+  background: var(--surface); color: var(--fg); border: 1.5px solid var(--rose);
+  font: 700 14px var(--font-body); cursor: pointer; box-shadow: 0 10px 28px -14px var(--rose);
+}
+.music svg { width: 18px; height: 18px; fill: var(--rose); }
+.music.on svg { animation: beat 1s ease-in-out infinite; }
+.music:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+/* soft entrance for sections below the fold (always visible, only slides) */
+.js .slide { transform: translateY(26px); transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.js .slide.in { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .reason, .reason svg, .coupon, .sweet, #yes, #no, .js .slide { transition: none; }
+  .music.on svg { animation: none; }
+  .js .slide { transform: none; }
+}
+</style>
+</head>
+<body>
+
+
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21.2l-1.4-1.3C5.4 15.2 2 12.1 2 8.3 2 5.2 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.2 22 8.3c0 3.8-3.4 6.9-8.6 11.6L12 21.2z"/></symbol>
+</svg>
+
+<button class="music" id="music" type="button" aria-pressed="false">
+  <svg><use href="#heart"/></svg><span id="musicLabel">Putar musik</span>
+</button>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">Khusus untuk satu orang, my chibi</p>
+    <h1>Livia <em>Octavia</em></h1>
+    <p class="sweet" id="sweet">Kamu cantik, di luar dan di dalam.</p>
+    <p class="lead">Halaman kecil ini aku buat hanya untukmu. Isinya sedikit kata, banyak rasa, dan satu hal yang ingin aku bilang berulang kali: kamu yang terbaik.</p>
+    <div class="row">
+      <button class="btn" id="love" type="button"><svg><use href="#heart"/></svg> Kirim cinta</button>
+      <p class="count" id="count" aria-live="polite">Belum ada cinta terkirim. Tekan tombolnya.</p>
+    </div>
+  </section>
+
+  <section class="split slide" aria-labelledby="clock-h">
+    <div class="stack">
+      <p class="eyebrow">Waktu kita</p>
+      <h2 class="sec-title" id="clock-h">Sudah sejauh ini</h2>
+    </div>
+    <div class="stack" style="gap:18px">
+      <div class="clock" id="clock">
+        <div class="tick"><b id="cD">0</b><span>hari</span></div>
+        <div class="tick"><b id="cH">0</b><span>jam</span></div>
+        <div class="tick"><b id="cM">0</b><span>menit</span></div>
+        <div class="tick"><b id="cS">0</b><span>detik</span></div>
+      </div>
+      <p id="clockText" style="max-width:30em">Setiap detik bersamamu terasa berharga.</p>
+      <ul class="mile" id="mile" aria-label="Tonggak perjalanan kita"></ul>
+    </div>
+  </section>
+
+  <section class="split slide" aria-labelledby="letter-h">
+    <div class="stack">
+      <p class="eyebrow">Sepucuk surat</p>
+      <h2 class="sec-title" id="letter-h">Untuk kamu</h2>
+    </div>
+    <article class="paper">
+      <p class="greet">Livia sayang,</p>
+      <p>Ada banyak hal yang sulit aku jelaskan dengan kata-kata, dan kamu adalah salah satunya. Tapi aku mau coba, karena kamu pantas mendengarnya.</p>
+      <p>Sejak ada kamu, hari-hariku terasa lebih ringan. Hal kecil jadi lucu, hari yang panjang jadi bisa dilewati, dan pulang jadi punya arti. Bukan tempatnya, tapi kamunya.</p>
+      <p>Terima kasih sudah sabar menghadapi aku, sudah tertawa di saat aku garing, dan sudah memilih tetap tinggal. Aku tahu itu bukan hal kecil.</p>
+      <p>Satu hal yang paling aku kagumi: kamu mandiri. Kamu berdiri di atas kakimu sendiri, dan aku nggak mau jadi orang yang mengambil itu darimu. Aku mau jadi orang yang berdiri di sampingmu, bertepuk tangan paling keras.</p>
+      <p>Dan kalau suatu hari kamu capek, ingat ya: kamu boleh bersandar kapan pun kamu mau. Aku di sini, nggak akan ke mana-mana.</p>
+      <p>Hari ini, besok, dan seterusnya, aku mau terus jadi orang yang bikin kamu merasa dicintai. Kamu layak mendapatkan itu, setiap hari.</p>
+      <p class="sign">Yang selalu sayang kamu</p>
+      <p class="ps">Kamu cantik banget hari ini. Aku nggak perlu lihat, aku tahu.</p>
+    </article>
+  </section>
+
+  <section class="slide" aria-labelledby="reasons-h">
+    <div class="stack" style="margin-bottom:24px">
+      <p class="eyebrow">Sentuh satu per satu</p>
+      <h2 class="sec-title" id="reasons-h" style="max-width:14em">Kenapa kamu yang terbaik</h2>
+    </div>
+    <div class="grid">
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Kemandirianmu</b><span>Kamu bisa sendiri, dan itu yang bikin aku makin kagum. Aku ada bukan untuk menggantikan, tapi menemani.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Senyummu</b><span>Satu senyum darimu cukup untuk membereskan hariku yang berantakan.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Hatimu yang lembut</b><span>Kamu peduli dengan cara yang tidak berisik, dan itu terasa sampai ke dalam.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Caramu mendengarkan</b><span>Kamu membuat aku merasa ceritaku penting, sekecil apa pun itu.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Tawamu</b><span>Suara tawamu adalah suara favoritku. Aku akan terus mencari alasan untuk mendengarnya.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Kesabaranmu</b><span>Kamu tetap tenang saat aku tidak. Aku belajar banyak dari situ.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Dirimu apa adanya</b><span>Kamu tidak perlu jadi siapa pun. Kamu yang sekarang sudah lebih dari cukup.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Semangatmu</b><span>Caramu berjuang diam-diam bikin aku bangga setiap hari.</span></button>
+      <button class="reason" type="button"><svg><use href="#heart"/></svg><b>Pelukanmu</b><span>Tempat paling aman yang pernah aku tahu.</span></button>
+    </div>
+  </section>
+
+  <section class="slide" aria-labelledby="coupon-h">
+    <div class="stack" style="margin-bottom:24px">
+      <p class="eyebrow">Hadiah kecil</p>
+      <h2 class="sec-title" id="coupon-h" style="max-width:14em">Kupon cinta untukmu</h2>
+      <p class="hint">Ketuk kupon untuk memakainya, lalu tunjukkan ke aku. Berlaku selamanya.</p>
+    </div>
+    <div class="grid" id="coupons">
+      <button class="coupon" type="button" data-id="peluk"><small>Kupon</small><b>Manja Seharian</b><span>Didepan aku kamu gak perlu selalu jadi perempuan yang hebat. Sini jadi bayi kecilnya aku, biar aku yang manjain xixixi.</span><em class="state" style="font-style:normal">Ketuk untuk pakai</em></button>
+      <button class="coupon" type="button" data-id="makan"><small>Kupon</small><b>Peluk Aku Sepuasnya</b><span>Gak perlu nanya alasan buat minta peluk. Kalau dunia lagi terasa berat, sini ya sayang istirahat sebentar dipelukan aku.</span><em class="state" style="font-style:normal">Ketuk untuk pakai</em></button>
+      <button class="coupon" type="button" data-id="curhat"><small>Kupon</small><b>Surat Cinta</b><span>Tukarkan Kupon ini kalau kamu lagi lupa betapa berharganya kamu di mata aku. Aku akan menuliskan lai hal-hal yang aku cintai dari kamu.</span><em class="state" style="font-style:normal">Ketuk untuk pakai</em></button>
+      <button class="coupon" type="button" data-id="metime"><small>Kupon</small><b>Quality Time Berdua</b><span>Gak harus pergi ke tempat mewah. Jalan berdua, makan sederhana, ngobrol ngalor ngidul, atau duduk berdua asal ada kamu waktu terasa sangat berharga buat aku.</span><em class="state" style="font-style:normal">Ketuk untuk pakai</em></button>
+      <button class="coupon" type="button" data-id="tidur"><small>Kupon</small><b>Bible Date</b><span>That's our foundation: baca Firman, berdoa, dan belajar mengasihi dengan lebih baik. Aku mau bukan cuma bertumbuh dekat kamu tapi juga bertumbuh bersama Tuhan.</span><em class="state" style="font-style:normal">Ketuk untuk pakai</em></button>
+      <button class="coupon" type="button" data-id="bahu"><small>Kupon</small><b>Kupon Dicintai Apa Adanya</b><span>Kupon ini bisa kamu tukarkan kapanpun kamu merasa gak cukup baik dan lelah. Biar aku ingatkan lagi aku gak memilih kamu karna kamu bisa melakukan semuanya. Aku memilih kamu karna aku mencintai kamu "Livia".</span><em class="state" style="font-style:normal">Ketuk untuk pakai</em></button>
+    </div>
+  </section>
+
+  <section class="split slide" aria-labelledby="meter-h">
+    <div class="stack">
+      <p class="eyebrow">Coba ukur</p>
+      <h2 class="sec-title" id="meter-h">Seberapa aku sayang kamu</h2>
+    </div>
+    <div class="meter-wrap">
+      <div class="meter-val" id="meterVal">50%</div>
+      <input type="range" id="meter" min="0" max="100" value="50" aria-label="Seberapa sayang">
+      <p class="meter-msg" id="meterMsg">Geser sampai ujung, lihat apa yang terjadi.</p>
+    </div>
+  </section>
+
+  <section class="split promises slide" aria-labelledby="promise-h">
+    <div class="stack">
+      <p class="eyebrow">Dari aku</p>
+      <h2 class="sec-title" id="promise-h">Yang akan aku jaga</h2>
+    </div>
+    <ul>
+      <li>Selalu ada untuk kamu, di hari baik maupun hari yang berat.</li>
+      <li>Jujur, termasuk saat itu tidak mudah diucapkan.</li>
+      <li>Merayakan hal-hal kecil bersamamu, karena itu yang paling berkesan.</li>
+      <li>Mengingat hal-hal yang kamu suka, dan membuatmu merasa diperhatikan.</li>
+      <li>Mendukung kamu jadi dirimu sendiri, tanpa mengatur dan tanpa menahan.</li>
+      <li>Terus belajar jadi pasangan yang lebih baik untukmu.</li>
+    </ul>
+  </section>
+
+  <section class="final slide" aria-labelledby="final-h">
+    <p class="eyebrow">Satu pertanyaan penting</p>
+    <h2 id="final-h">Livia, mau jadi <em>milikku</em> hari ini, besok, dan selamanya?</h2>
+    <div class="ask" id="ask">
+      <button class="btn" id="yes" type="button"><svg><use href="#heart"/></svg> Mau banget</button>
+      <button class="btn ghost" id="no" type="button">Pikir dulu</button>
+    </div>
+    <p id="secret" aria-live="polite"></p>
+  </section>
+
+  <section class="slide memories" aria-labelledby="mem-h">
+    <div class="stack">
+      <p class="eyebrow">Kenangan kita</p>
+      <h2 class="sec-title" id="mem-h">Our Memories</h2>
+      <p class="hint" style="max-width:30em">Setiap bingkai menyimpan satu hari yang nggak mau aku lupakan.</p>
+    </div>
+    <!-- Cara isi foto: buat folder "foto" di samping index.html, lalu taruh gambar bernama 01.jpg sampai 10.jpg.
+         Kalau fotonya PNG, ganti ekstensi di src. Ubah tulisan di figcaption sesukamu. Bingkai tanpa foto tampil kosong. -->
+    <div class="frames">
+      <figure class="frame f-polaroid"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 1</div><img src="foto1.jpeg" alt="Kenangan 1" loading="lazy"></div><figcaption>Awal kita</figcaption></figure>
+      <figure class="frame f-gold"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 2</div><img src="foto2.jpeg" alt="Kenangan 2" loading="lazy"></div><figcaption>Hari yang bikin aku tersenyum</figcaption></figure>
+      <figure class="frame f-heart"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 3</div><img src="foto3.jpeg" alt="Kenangan 3" loading="lazy"></div><figcaption>Jalan berdua</figcaption></figure>
+      <figure class="frame f-oval"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 4</div><img src="foto4.jpeg" alt="Kenangan 4" loading="lazy"></div><figcaption>Tawa yang paling aku suka</figcaption></figure>
+      <figure class="frame f-film wide"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 5</div><img src="foto5.jpeg" alt="Kenangan 5" loading="lazy"></div><figcaption>Satu foto, seribu rasa</figcaption></figure>
+      <figure class="frame f-arch"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 6</div><img src="foto6.jpeg" alt="Kenangan 6" loading="lazy"></div><figcaption>Kamu di hari itu</figcaption></figure>
+      <figure class="frame f-washi"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 7</div><img src="foto7.jpeg" alt="Kenangan 7" loading="lazy"></div><figcaption>Hari biasa yang jadi istimewa</figcaption></figure>
+      <figure class="frame f-neon"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 8</div><img src="foto8.jpeg" alt="Kenangan 8" loading="lazy"></div><figcaption>Berdua selalu</figcaption></figure>
+      <figure class="frame f-post wide"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 9</div><img src="foto9.jpeg" alt="Kenangan 9" loading="lazy"></div><figcaption>Makan bareng, ketawa bareng</figcaption></figure>
+      <figure class="frame f-glass"><div class="photo"><div class="ph"><svg><use href="#heart"/></svg>Foto 10</div><img src="foto10.jpeg" alt="Kenangan 10" loading="lazy"></div><figcaption>Kita, sampai nanti</figcaption></figure>
+    </div>
+  </section>
+
+  <footer>Dibuat dengan sepenuh hati, untuk Livia Octavia.</footer>
+</main>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv = document.getElementById('petals');
+  var ctx = cv.getContext('2d');
+  var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var petals = [], bursts = [];
+
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
+  function color(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#f7a8c2'; }
+
+  function resize() {
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function makePetal(top) {
+    return { x: Math.random() * W, y: top ? -20 : Math.random() * H, s: 6 + Math.random() * 9, vy: .35 + Math.random() * .7,
+      sway: Math.random() * 6.28, sp: .01 + Math.random() * .02, rot: Math.random() * 6.28, vr: (Math.random() - .5) * .03, a: .25 + Math.random() * .4 };
+  }
+  function heartPath(x, y, s) {
+    ctx.beginPath();
+    ctx.moveTo(x, y + s * .35);
+    ctx.bezierCurveTo(x, y - s * .2, x - s, y - s * .2, x - s, y + s * .35);
+    ctx.bezierCurveTo(x - s, y + s * .85, x, y + s * 1.1, x, y + s * 1.4);
+    ctx.bezierCurveTo(x, y + s * 1.1, x + s, y + s * .85, x + s, y + s * .35);
+    ctx.bezierCurveTo(x + s, y - s * .2, x, y - s * .2, x, y + s * .35);
+    ctx.closePath();
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    var pc = color('--petal'), rc = color('--rose'), gc = color('--gold');
+    for (var i = 0; i < petals.length; i++) {
+      var p = petals[i];
+      p.y += p.vy; p.sway += p.sp; p.x += Math.sin(p.sway) * .6; p.rot += p.vr;
+      if (p.y > H + 20) petals[i] = makePetal(true);
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = p.a; ctx.fillStyle = pc;
+      ctx.beginPath(); ctx.ellipse(0, 0, p.s, p.s * .55, 0, 0, 6.283); ctx.fill();
+      ctx.restore();
+    }
+    for (var j = bursts.length - 1; j >= 0; j--) {
+      var b = bursts[j];
+      b.x += b.vx; b.y += b.vy; b.vy += b.g; b.life -= b.d;
+      if (b.life <= 0) { bursts.splice(j, 1); continue; }
+      ctx.globalAlpha = Math.max(b.life, 0); ctx.fillStyle = b.gold ? gc : rc;
+      heartPath(b.x, b.y, b.s); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  function burst(x, y, n) {
+    if (reduce) return;
+    for (var i = 0; i < n; i++) {
+      var a = Math.random() * 6.283, sp = 1.5 + Math.random() * 4.5;
+      bursts.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 2, g: .05, d: .012, s: 5 + Math.random() * 7, life: 1, gold: Math.random() < .2 });
+    }
+  }
+  function rise(x, y) {
+    if (reduce) return;
+    bursts.push({ x: x, y: y, vx: (Math.random() - .5) * .8, vy: -1 - Math.random(), g: -.01, d: .02, s: 3 + Math.random() * 3, life: .9, gold: Math.random() < .3 });
+  }
+  function rain(n) {
+    if (reduce) return;
+    for (var i = 0; i < n; i++) {
+      (function (k) { setTimeout(function () {
+        bursts.push({ x: Math.random() * W, y: -10, vx: (Math.random() - .5) * 1.2, vy: 1 + Math.random() * 2, g: .02, d: .004, s: 6 + Math.random() * 9, life: 1, gold: Math.random() < .25 });
+      }, k * 25); })(i);
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  var total = reduce ? 0 : (W < 600 ? 24 : 42);
+  for (var i = 0; i < total; i++) petals.push(makePetal(false));
+  if (!reduce) frame();
+
+  // jejak hati di kursor
+  var lastT = 0;
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'touch') return;
+    var t = Date.now(); if (t - lastT < 70) return; lastT = t;
+    rise(e.clientX, e.clientY);
+  });
+
+  // kata manis bergantian
+  var sweets = ['Kamu cantik, di luar dan di dalam.', 'Kamu alasan aku tersenyum hari ini.', 'Terima kasih sudah jadi kamu.', 'Kamu adalah doa yang dijawab.', 'Di mana pun kamu, di situ rumahku.'];
+  var si = 0, sw = document.getElementById('sweet');
+  if (!reduce) setInterval(function () {
+    sw.style.opacity = 0;
+    setTimeout(function () { si = (si + 1) % sweets.length; sw.textContent = sweets[si]; sw.style.opacity = 1; }, 500);
+  }, 4200);
+
+  // kirim cinta
+  var n = 0, cnt = document.getElementById('count');
+  document.getElementById('love').addEventListener('click', function (e) {
+    n++;
+    var r = e.currentTarget.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 14);
+    if (n % 5 === 0) rain(30);
+    cnt.textContent = n === 1 ? '1 cinta terkirim. Terima kasih sudah ada.' : n + ' cinta terkirim, dan masih banyak lagi yang menunggu.';
+  });
+
+  // penghitung waktu
+  // Dimulai Minggu, 17 Mei 2026 pukul 00:01 WIB (146 hari 9 jam 22 menit pada Sabtu, 10 Oktober 2026 pukul 09:23 WIB)
+  var START = new Date('2026-05-17T00:01:00+07:00');
+  var clockText = document.getElementById('clockText');
+  function pad(x) { return x < 10 ? '0' + x : '' + x; }
+  function fmt(d) { return d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta' }); }
+  function tick() {
+    var d = Math.max(0, Date.now() - START.getTime()), s = Math.floor(d / 1000);
+    document.getElementById('cD').textContent = Math.floor(s / 86400);
+    document.getElementById('cH').textContent = pad(Math.floor(s % 86400 / 3600));
+    document.getElementById('cM').textContent = pad(Math.floor(s % 3600 / 60));
+    document.getElementById('cS').textContent = pad(s % 60);
+  }
+  tick(); setInterval(tick, 1000);
+  clockText.textContent = 'Kita mulai pada ' + fmt(START) + '. Dan setiap detiknya, aku makin sayang sama kamu.';
+
+  // tonggak perjalanan
+  var half = new Date(START.getTime()); half.setUTCMonth(half.getUTCMonth() + 6);
+  var year = new Date(START.getTime()); year.setUTCFullYear(year.getUTCFullYear() + 1);
+  var milestones = [
+    ['100 hari', new Date(START.getTime() + 100 * 864e5)],
+    ['150 hari', new Date(START.getTime() + 150 * 864e5)],
+    ['6 bulan', half],
+    ['200 hari', new Date(START.getTime() + 200 * 864e5)],
+    ['1 tahun', year]
+  ];
+  var mile = document.getElementById('mile'), nowMs = Date.now();
+  milestones.forEach(function (m) {
+    var li = document.createElement('li'), left = Math.ceil((m[1].getTime() - nowMs) / 864e5);
+    var done = m[1].getTime() <= nowMs;
+    if (done) li.className = 'done';
+    li.innerHTML = '<b></b><small></small><span class="st"></span>';
+    li.querySelector('b').textContent = m[0];
+    li.querySelector('small').textContent = fmt(m[1]);
+    li.querySelector('.st').textContent = done ? 'Sudah kita lewati' : (left <= 1 ? 'Besok!' : left + ' hari lagi');
+    mile.appendChild(li);
+  });
+
+  // alasan
+  document.querySelectorAll('.reason').forEach(function (el) {
+    el.setAttribute('aria-pressed', 'false');
+    el.addEventListener('click', function (e) {
+      var on = el.classList.toggle('on');
+      el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on) { var r = el.getBoundingClientRect(); burst(e.clientX || r.left + 30, e.clientY || r.top + 30, 7); }
+    });
+  });
+
+  // kupon
+  var used = {}; try { used = JSON.parse(store('livia_coupons2') || '{}'); } catch (e) { used = {}; }
+  document.querySelectorAll('.coupon').forEach(function (el) {
+    var id = el.getAttribute('data-id'), st = el.querySelector('.state');
+    function paint() {
+      el.classList.toggle('used', !!used[id]);
+      st.textContent = used[id] ? 'Sudah dipakai. Tunjukkan ke aku ya!' : 'Ketuk untuk pakai';
+    }
+    paint();
+    el.addEventListener('click', function (e) {
+      used[id] = !used[id]; store('livia_coupons2', JSON.stringify(used)); paint();
+      if (used[id]) burst(e.clientX || 0, e.clientY || 0, 16);
+    });
+  });
+
+  // meter sayang
+  var meter = document.getElementById('meter'), mv = document.getElementById('meterVal'), mm = document.getElementById('meterMsg');
+  var steps = [
+    [10, 'Segitu doang? Coba geser lagi.'],
+    [30, 'Mulai hangat. Tapi ini belum ada apa-apanya.'],
+    [60, 'Sudah separuh lebih. Terus geser.'],
+    [90, 'Hampir penuh. Tinggal sedikit lagi.'],
+    [99, 'Satu langkah lagi.'],
+    [101, 'Alatnya tidak cukup. Sayangku ke kamu tidak ada batasnya.']
+  ];
+  meter.addEventListener('input', function () {
+    var v = +meter.value;
+    if (v >= 100) { mv.textContent = '∞'; } else { mv.textContent = v + '%'; }
+    for (var i = 0; i < steps.length; i++) { if (v < steps[i][0]) { mm.textContent = steps[i][1]; break; } }
+    if (v >= 100) {
+      mm.textContent = steps[5][1];
+      var r = meter.getBoundingClientRect(); burst(r.left + r.width - 10, r.top, 30); rain(20);
+    }
+  });
+
+  // pertanyaan akhir
+  var yes = document.getElementById('yes'), no = document.getElementById('no'), secret = document.getElementById('secret');
+  var noCount = 0, scale = 1;
+  var noTexts = ['Pikir dulu', 'Yakin?', 'Coba pikir lagi', 'Aku sedih nih', 'Please...', 'Masa sih?'];
+  function dodge() {
+    noCount++; scale = Math.min(scale + .18, 2.1);
+    yes.style.transform = 'scale(' + scale + ')';
+    no.textContent = noTexts[Math.min(noCount, noTexts.length - 1)];
+    no.style.transform = 'scale(' + Math.max(1 - noCount * .08, .6) + ')';
+  }
+  no.addEventListener('click', dodge);
+  var msgs = [
+    'Aku tahu kamu bakal bilang iya. Terima kasih, Livia sayang.',
+    'Mulai hari ini sampai nanti, aku akan terus memilih kamu.',
+    'Aku sayang kamu. Hari ini, besok, dan seterusnya.'
+  ];
+  var typing = null;
+  function type(text) {
+    if (typing) clearInterval(typing);
+    secret.textContent = '';
+    if (reduce) { secret.textContent = text; return; }
+    var i = 0;
+    typing = setInterval(function () { secret.textContent = text.slice(0, ++i); if (i >= text.length) clearInterval(typing); }, 45);
+  }
+  var yi = 0;
+  yes.addEventListener('click', function () {
+    var r = yes.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 70); rain(90);
+    type(msgs[yi % msgs.length]); yi++;
+    yes.lastChild.textContent = ' Sekali lagi?';
+    no.hidden = true; yes.style.transform = 'none';
+  });
+
+  // musik kotak musik (WebAudio, nada buatan sendiri)
+  // Lagu sendiri (opsional): taruh file mp3 di folder yang sama dengan index.html, lalu isi nama filenya, misalnya 'lagu.mp3'.
+  // Kalau dikosongkan, dimainkan musik kotak musik bawaan.
+  var SONG_FILE = 'livia.mp3', audioEl = null;
+  var mb = document.getElementById('music'), ml = document.getElementById('musicLabel');
+  var ac = null, mt = null, ni = 0, playing = false;
+  var melody = [523.25, 659.25, 783.99, 659.25, 880, 783.99, 659.25, 587.33,
+                493.88, 587.33, 698.46, 587.33, 783.99, 698.46, 587.33, 523.25,
+                440, 523.25, 659.25, 523.25, 698.46, 659.25, 587.33, 493.88,
+                523.25, 659.25, 783.99, 1046.5, 783.99, 659.25, 523.25, 392];
+  function note(freq) {
+    var t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'triangle'; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.12, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + 1.4);
+    o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 1.5);
+    var o2 = ac.createOscillator(), g2 = ac.createGain();
+    o2.type = 'sine'; o2.frequency.value = freq * 2;
+    g2.gain.setValueAtTime(0, t); g2.gain.linearRampToValueAtTime(.03, t + .01); g2.gain.exponentialRampToValueAtTime(.0001, t + .6);
+    o2.connect(g2); g2.connect(ac.destination); o2.start(t); o2.stop(t + .7);
+  }
+  mb.addEventListener('click', function () {
+    try {
+      if (!ac) { var AC = window.AudioContext || window.webkitAudioContext; ac = new AC(); }
+      if (ac.state === 'suspended') ac.resume();
+    } catch (e) { ml.textContent = 'Musik tidak didukung'; return; }
+    playing = !playing;
+    mb.classList.toggle('on', playing); mb.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    ml.textContent = playing ? 'Jeda musik' : 'Putar musik';
+    if (SONG_FILE) {
+      if (!audioEl) { audioEl = new Audio(SONG_FILE); audioEl.loop = true; }
+      if (playing) { audioEl.play().catch(function () {}); } else { audioEl.pause(); }
+      return;
+    }
+    if (playing) { mt = setInterval(function () { note(melody[ni % melody.length]); ni++; }, 520); }
+    else { clearInterval(mt); }
+  });
+
+  // foto kenangan: kalau file foto belum ada, bingkai tampil kosong
+  document.querySelectorAll('.photo img').forEach(function (img) {
+    function gone() { img.remove(); }
+    if (img.complete && !img.naturalWidth) gone(); else img.addEventListener('error', gone);
+  });
+
+  // masuk perlahan saat di-scroll
+  var slides = document.querySelectorAll('.slide');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .08 });
+    slides.forEach(function (s) { io.observe(s); });
+  } else { slides.forEach(function (s) { s.classList.add('in'); }); }
+})();
+</script>
+
+</body>
+</html>
